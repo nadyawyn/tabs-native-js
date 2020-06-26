@@ -22,3 +22,6 @@ This script implements simple tabs where one section of content is shown and oth
 </li>
 <li>That's it!</li>
 </ol>
+
+<h2>Preview</h2>
+See live preview <a href="https://nadyawyn.github.io/tabs-native-js/>here</a>
