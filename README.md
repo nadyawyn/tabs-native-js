@@ -18,7 +18,7 @@ This script implements simple tabs where one section of content is shown and oth
 <li>- Argument 1: headings list class</li>
 <li>- Argument 2: tab heading class</li>
 <li>- Argument 3: tab content class</li>
-<ul>
+</ul>
 </li>
 <li>That's it!</li>
 </ol>
