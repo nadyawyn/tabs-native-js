@@ -1,42 +1,58 @@
-//MAKING COOL TABS
+//Waiting for the DOM model to load all components, then start
 window.addEventListener('DOMContentLoaded', function () {
 
 	'use strict';
-	//выбираем хедер и его элементы в виде массива, а также контент самих табов
-	let tab = document.querySelectorAll('.info-header-tab'),
-		info = document.querySelector('.info-header'),
-		tabContent = document.querySelectorAll('.info-tabcontent');
 
-	//пишем функцию сокрытия контента: передаем в нее аргумент а, который позволит нам скрыть табы с нужными номерами
-	function hideTabContent(a) {
-		for (let i = a; i < tabContent.length; i++) {
-			tabContent[i].classList.remove('show');
-			tabContent[i].classList.add('hide');
-		}
-	}
+	//Setting the function content
+	function simpleTabs(tabHeadingList, tabHeading, tabText) {
 
-	hideTabContent(1);
-	//пишем функцию ПОКАЗА нужного таба: передаем в нее аргумент b, который будет соответствовать НОМЕРУ нужного таба, который мы покажем, когда до него дойдет цикл. А цикл поймет, что это нужный номер, т.к. этот номер будет равен порядковому номеру заголовка таба.
+		//Putting into variables the Tab Heading List, Tab Headings as an array and Tab Content as an array
+		let info = document.querySelector('.' + tabHeadingList),
+			tab = document.querySelectorAll('.' + tabHeading),
+			tabContent = document.querySelectorAll('.' + tabText);
 
-	function showTabContent(b) {
-		if (tabContent[b].classList.contains('hide')) {
-			tabContent[b].classList.remove('hide');
-			tabContent[b].classList.add('show');
-		}
-	}
-	//при клике на нужный заголовок таба мы проверяем - было ли событие, и было ли это событие кликом по заголовку таба, а не по их контейнеру. Если был клик по заголовку таба, то мы берем его НОМЕр и сравниваем с номером элементов массива табов (в цикле). Как только номе перебираемых табов совпадает с номером заголовка, мы ПОКАЗЫВАЕМ данный таб, УБИРАЕМ все остальные табы и останавливаем цикл.
-
-	info.addEventListener('click', function (event) {
-		let target = event.target;
-		if (target && target.classList.contains('info-header-tab')) {
-			for (let i = 0; i < tab.length; i++) {
-				if (target == tab[i]) {
-					hideTabContent(0);
-					showTabContent(i);
-					break;
-				}
-
+		//Function for HIDING the Tab Content, has argument 'a' which sets the number of content sections to be hidden
+		function hideTabContent(a) {
+			for (let i = a; i < tabContent.length; i++) {
+				tabContent[i].classList.remove('show');
+				tabContent[i].classList.add('hide');
 			}
 		}
-	});
+		//Launching the hiding function
+		hideTabContent(1);
+
+		//Function for SHOWING the Tab Content which has number set in argument 'b'
+		function showTabContent(b) {
+			if (tabContent[b].classList.contains('hide')) {
+				tabContent[b].classList.remove('hide');
+				tabContent[b].classList.add('show');
+			}
+		}
+
+		//On click on the Tab Heading List we check if the click was on a certain Tab Heading. 
+		//If so, we check which Tab we clicked on. 
+		//We take its number and show the tab content with the same number, hiding all others.
+
+		info.addEventListener('click', function (event) {
+			let target = event.target;
+			if (target && target.classList.contains(tabHeading)) {
+				for (let i = 0; i < tab.length; i++) {
+					if (target == tab[i]) {
+						hideTabContent(0);
+						showTabContent(i);
+						break;
+					}
+				}
+			}
+		});
+	}
+	//Simply add into the function arguments REAL class names of your elements
+	// ! Without a dot 
+	// Argument 1: headings list class
+	// Argument 2: tab heading class
+	// Argument 3: tab content class
+	// If in doubt, see the HTML preview 
+
+	simpleTabs('info-header', 'info-header-tab', 'info-tabcontent');
+
 });
